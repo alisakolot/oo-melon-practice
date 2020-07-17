@@ -6,26 +6,26 @@
 class MelonType(object):
     """A species of melon at a melon farm."""
 
-    def __init__(self, code, first_harvest, color, is_seedless, is_bestseller, name):
+    def __init__(self, code, name, first_harvest, color, is_seedless, is_bestseller):
         """Initialize a melon."""
         #Activate the 'variables'/traits ^parameters^ related to each object by telling the function to create a template. 
         #Follow parameter order.
 
-        self.code = code
+        self.code = code 
+        self.name = name
         self.first_harvest = first_harvest
         self.color = color
         self.is_seedles = is_seedless
         self.is_bestseller = is_bestseller
-        self.name = name
-        
+        self.pairings = []
 
-        # Fill in the rest
+        
 
     def add_pairing(self, pairing):
         """Add a food pairing to the instance's pairings list."""
         #Adds pairing information (pairing "method") 
 
-        self.add_pairing = pairing
+        self.pairings.append(pairing)
 
     def update_code(self, new_code):
         """Replace the reporting code with the new_code."""
@@ -47,6 +47,7 @@ def make_melon_types():
     musk = MelonType('musk', 'Muskmelon', 1998, 'green',True, True)
     musk.add_pairing('mint') #This specifies the pairing 
     all_melon_types.append(musk) #This gives us the name of the melon
+    print(musk)
 
     #Casaba:
     cas = MelonType("cas", "Casaba", 2003, 'orange', True, False)
@@ -65,25 +66,43 @@ def make_melon_types():
     
 
 
-
-
-    all_melon_types.append(musk)
-
-    print(all_melon_types)
-    
-
-
     return all_melon_types
 
+    
 def print_pairing_info(melon_types):
     """Prints information about each melon type's pairings."""
 
-    # Fill in the rest
+    for melon in melon_types: 
+        print(f' {melon.name} pairs with:') 
+
+        for pairing in melon.pairings: 
+            print(f' - {pairing}') 
+
+
+    
 
 def make_melon_type_lookup(melon_types):
     """Takes a list of MelonTypes and returns a dictionary of melon type by code."""
 
-    # Fill in the rest
+    melon_dict = {}
+
+    for melon_obj in melon_types:
+        melon_dict[melon_obj.code] = melon_obj
+
+    
+    
+    return melon_dict
+
+
+all_melon_types = make_melon_types()
+# print(print_pairing_info(all_melon_types))
+# print(make_melon_type_lookup(all_melon_types))
+# (print(all_melon_types))
+
+
+
+
+# print(make_melon_types())
 
 ############
 # Part 2   #
@@ -92,13 +111,37 @@ def make_melon_type_lookup(melon_types):
 class Melon(object):
     """A melon in a melon harvest."""
 
-    # Fill in the rest
-    # Needs __init__ and is_sellable methods
+    def __init__(self, code, shape_rating, color_rating, harvested_by, is_bestseller):
+        self.code = code 
+        self.shape_rating = shape_rating
+        self.color_rating = color_rating
+        self.harvested_by = harvested_by
+        self.is_bestseller = is_bestseller
+
+
+        
+
+    def melon_type(melon_types):
+
+
+
 
 def make_melons(melon_types):
     """Returns a list of Melon objects."""
 
-    # Fill in the rest
+    # self, code, shape_rating, color_rating, harvest_location , is_bestseller
+
+    #Muskmelon:
+        # musk = MelonType('musk', 'Muskmelon', 1998, 'green',True, True)
+        # musk.add_pairing('mint') #This specifies the pairing 
+        # all_melon_types.append(musk) #This gives us the name of the melon
+        # print(musk)
+
+        melons_by_id = make_melon_type_lookup(melon_types)
+
+        #Melon 1
+        melon_1 = Melon(melons_by_id['yw'], 8, 7, 2, 'Sheila')
+
 
 def get_sellability_report(melons):
     """Given a list of melon object, prints whether each one is sellable."""
